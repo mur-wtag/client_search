@@ -1,0 +1,32 @@
+env:
+  RUBY_VERSION: 3.1.2
+  BUNDLER_CACHE_VERSION: 0
+
+name: Linting and tests
+on: push
+jobs:
+  code-linting:
+    name: Code linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+          cache-version: ${{ env.BUNDLER_CACHE_VERSION }}
+      - name: Rubocop linting
+        run: bin/bundle exec rubocop
+  tests:
+    name: RSpec
+    needs: code-linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+          cache-version: ${{ env.BUNDLER_CACHE_VERSION }}
+      - name: Run tests
+        run: bundle exec rspec

@@ -37,3 +37,7 @@ For unit tests I am using `RSpec`. To run:
 bundle exec rspec
 ```
 
+### Github actions - CI/CD
+On each commit being pushed to the repo we're running a CI workflow defined in `.github/workflows/main.yml`. The workflow is split into three separate parts:
+* Linting and quality checks `rubocop`
+* RSpec
