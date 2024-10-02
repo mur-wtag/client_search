@@ -41,3 +41,5 @@ bundle exec rspec
 On each commit being pushed to the repo we're running a CI workflow defined in `.github/workflows/main.yml`. The workflow is split into three separate parts:
 * Linting and quality checks `rubocop`
 * RSpec
+
+Cheers!
