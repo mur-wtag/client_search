@@ -1,4 +1,4 @@
-# Client Search
+# Client Search ![main](https://github.com/mur-wtag/client_search/actions/workflows/main.yml/badge.svg?branch=main)
 
 ## Description
 This is a minimalist Ruby command-line application that provides two main features:
