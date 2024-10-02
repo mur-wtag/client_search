@@ -16,7 +16,7 @@ jobs:
           bundler-cache: true
           cache-version: ${{ env.BUNDLER_CACHE_VERSION }}
       - name: Rubocop linting
-        run: bin/bundle exec rubocop
+        run: bundle exec rubocop
   tests:
     name: RSpec
     needs: code-linting
