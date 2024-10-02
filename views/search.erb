@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Client Search and Duplicates</title>
+  </head>
+  <body>
+    <h1>Client Search</h1>
+
+    <form action="/search" method="POST">
+      <input type="hidden" name="search[content_file_path]" value='<%= @file_path %>'>
+      <label for="query">
+        Search Query:
+        <input type="text" name="query" required>
+      </label>
+
+      <label>
+        Search By:
+        <select name="search[field]">
+          <option value="full_name">Full Name</option>
+          <option value="email">Email</option>
+        </select>
+      </label>
+
+      <button type="submit">Search</button>
+    </form>
+
+    <h1>Find Duplicates</h1>
+
+    <form action="/find_duplicates" method="POST">
+      <input type="hidden" name="duplicate[content_file_path]" value='<%= @file_path %>'>
+      <label>
+        Find Duplicates By:
+        <select name="duplicate[field]">
+          <option value="email">Email</option>
+          <option value="full_name">Full Name</option>
+        </select>
+      </label>
+
+      <button type="submit">Find Duplicates</button>
+    </form>
+  </body>
+</html>

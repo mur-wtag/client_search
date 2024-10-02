@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Duplicate Results</title>
+</head>
+  <body>
+    <h1>Duplicate Clients</h1>
+
+    <% if @duplicates.empty? %>
+      <p>No duplicates found.</p>
+    <% else %>
+      <ul>
+        <% @duplicates.each do |field_value, clients| %>
+          <li>Duplicate: <%= field_value %></li>
+          <ul>
+            <% clients.each do |client| %>
+              <li><%= client['full_name'] %> - <%= client['email'] %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <a href="/">Back</a>
+  </body>
+</html>

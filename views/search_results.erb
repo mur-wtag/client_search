@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Search Results</title>
+  </head>
+  <body>
+    <h1>Search Results</h1>
+
+    <% if @results.empty? %>
+      <p>No clients found.</p>
+    <% else %>
+      <ul>
+        <% @results.each do |client| %>
+          <li><%= client['full_name'] %> - <%= client['email'] %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <a href="/">Back</a>
+  </body>
+</html>
