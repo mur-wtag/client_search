@@ -7,6 +7,8 @@ ruby '3.1.2'
 
 gem 'puma'
 gem 'rack'
+gem 'rack-test'
+gem 'rackup'
 gem 'rspec'
 gem 'rubocop'
 gem 'sinatra'

@@ -3,17 +3,13 @@
 require_relative 'client'
 
 class CommandLine
-  def initialize
-    @client = Client.new('clients.json')
+  def initialize(file_path = 'clients.json')
+    @client = Client.new(file_path)
     @commands = %w[search find_duplicates]
     @fields = %w[id full_name email]
   end
 
   def start
-    puts '===================='
-    puts '   Client Search    '
-    puts '===================='
-
     puts "Select an option (type 'quit' for exit):"
     @commands.each_with_index do |option, index|
       puts "#{index + 1}. #{option}"
