@@ -28,60 +28,80 @@ RSpec.describe Client do
   end
 
   describe '#search_by' do
+    subject { client.search_by(query, field) }
+
+    let(:field) { 'full_name' }
+
     context 'when searching by full_name' do
+      let(:query) { 'Jane' }
+
       it 'returns clients with names partially matching the query' do
-        result = client.search_by('Jane')
-        expect(result.size).to eq(3)
-        expect(result.map { |c| c['full_name'] }).to contain_exactly('Jane Doe', 'Jane Smith', 'Jane Doe')
+        expect(subject.size).to eq(3)
+        expect(subject.map { |c| c['full_name'] }).to contain_exactly('Jane Doe', 'Jane Smith', 'Jane Doe')
       end
 
-      it 'is case insensitive' do
-        result = client.search_by('jane')
-        expect(result.size).to eq(3)
+      context 'when query case insensitive' do
+        let(:query) { 'jane' }
+
+        it 'is case insensitive' do
+          expect(subject.size).to eq(3)
+        end
       end
 
-      it 'returns an empty array if no match is found' do
-        result = client.search_by('nonexistent')
-        expect(result).to be_empty
+      context 'when not found' do
+        let(:query) { 'nonexistent' }
+
+        it 'returns an empty array if no match is found' do
+          expect(subject).to be_empty
+        end
       end
     end
 
     context 'when searching by email' do
+      let(:field) { 'email' }
+      let(:query) { 'jane' }
+
       it 'returns clients with emails partially matching the query' do
-        result = client.search_by('jane', 'email')
-        expect(result.size).to eq(3)
+        expect(subject.size).to eq(3)
       end
     end
 
     context 'when searching by id' do
+      let(:field) { 'id' }
+      let(:query) { 4 }
+
       it 'returns clients with id matching the query' do
-        result = client.search_by(4, 'id')
-        expect(result.size).to eq(1)
+        expect(subject.size).to eq(1)
       end
     end
   end
 
   describe '#find_duplicate_by' do
+    subject { client.find_duplicate_by(field) }
+
+    let(:field) { 'email' }
+
     context 'when finding duplicates by email' do
       it 'returns clients with duplicate emails' do
-        duplicates = client.find_duplicate_by('email')
-        expect(duplicates.keys).to contain_exactly('jane.doe@example.com')
-        expect(duplicates['jane.doe@example.com'].size).to eq(2)
+        expect(subject.keys).to contain_exactly('jane.doe@example.com')
+        expect(subject['jane.doe@example.com'].size).to eq(2)
       end
     end
 
     context 'when finding duplicates by full_name' do
+      let(:field) { 'full_name' }
+
       it 'returns clients with duplicate full names' do
-        duplicates = client.find_duplicate_by('full_name')
-        expect(duplicates.keys).to contain_exactly('Jane Doe')
-        expect(duplicates['Jane Doe'].size).to eq(2)
+        expect(subject.keys).to contain_exactly('Jane Doe')
+        expect(subject['Jane Doe'].size).to eq(2)
       end
     end
 
     context 'when there are no duplicates' do
+      let(:field) { 'id' }
+
       it 'returns an empty hash' do
-        result = client.find_duplicate_by('id')
-        expect(result).to be_empty
+        expect(subject).to be_empty
       end
     end
   end

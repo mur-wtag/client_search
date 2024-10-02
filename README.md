@@ -42,4 +42,11 @@ On each commit being pushed to the repo we're running a CI workflow defined in `
 * Linting and quality checks `rubocop`
 * RSpec
 
+### Future implementation
+I have already developed a tiny web application using `Sinatra`. More feature could be added later e.g. exposing search results as json api response.
+To checkout this web application, just use this command:
+```shell
+ruby webapp.rb
+```
+
 Cheers!
